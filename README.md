@@ -1,1 +1,1 @@
-# nginx-proxy
+# nginx-injection
