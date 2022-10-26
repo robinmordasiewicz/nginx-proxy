@@ -1,0 +1,22 @@
+server {
+    listen       ${LISTENPORT};
+    server_name  ${SERVERNAME};
+
+    # resolver 8.8.8.8 valid=30s ipv6=off;
+
+    location / {
+        proxy_ssl_server_name on;
+        proxy_set_header Host ${NEXTORIGINHOST};
+        set $dest ${DESINATIONPROTCOL}://${DESTINATION};
+        proxy_pass $dest;
+        sub_filter '<a href="http://${ORIGINHOST}/'  '<a href="https://${ORIGINHOST}/';
+        sub_filter '<img src="http://${ORIGINHOST}/' '<img src="https://${ORIGINHOST}/';
+        sub_filter_once on;
+    }
+
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+
+}
