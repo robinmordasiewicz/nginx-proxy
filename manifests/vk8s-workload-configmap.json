@@ -1,0 +1,35 @@
+{
+  "kind": "ConfigMap",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "nginx-proxy",
+    "namespace": "blueapp",
+    "annotations": {
+      "ves.io/virtual-sites": "ves-io-shared/ves-io-all-res"
+    },
+    "managedFields": [
+      {
+        "manager": "Go-http-client",
+        "operation": "Update",
+        "apiVersion": "v1",
+        "time": "2022-10-26T20:02:11Z",
+        "fieldsType": "FieldsV1",
+        "fieldsV1": {
+          "f:data": {
+            ".": {},
+            "f:default-config": {}
+          },
+          "f:metadata": {
+            "f:annotations": {
+              ".": {},
+              "f:ves.io/virtual-sites": {}
+            }
+          }
+        }
+      }
+    ]
+  },
+  "data": {
+    "default-config": "server {\n    listen       8080;\n    server_name  nginx-proxy.blueapp;\n\n    #resolver 8.8.8.8 valid=30s ipv6=off;\n\n    location / {\n        proxy_ssl_server_name on;\n        proxy_set_header Host www.blueapp;\n        set $dest http://www.blueapp;\n        #set $dest http://159.60.129.231;\n        #set $dest http://www.f5.com\n        proxy_pass $dest;\n        sub_filter '<a href=\"http://www.f5.com/'  '<a href=\"https://www.f5.com/';\n        sub_filter '<img src=\"http://www.f5.com/' '<img src=\"https://www.f5.com/';\n        sub_filter_once on;\n    }\n\n    error_page   500 502 503 504  /50x.html;\n    location = /50x.html {\n        root   /usr/share/nginx/html;\n    }\n}"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "kind": "Service",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "nginx-proxy",
+    "namespace": "blueapp",
+    "annotations": {
+      "ves.io/proxy-type": "HTTP_PROXY",
+      "ves.io/virtual-sites": "ves-io-shared/ves-io-all-res"
+    },
+    "managedFields": [
+      {
+        "manager": "Go-http-client",
+        "operation": "Update",
+        "apiVersion": "v1",
+        "time": "2022-10-26T18:57:57Z",
+        "fieldsType": "FieldsV1",
+        "fieldsV1": {
+          "f:metadata": {
+            "f:annotations": {
+              ".": {},
+              "f:ves.io/proxy-type": {},
+              "f:ves.io/virtual-sites": {}
+            }
+          },
+          "f:spec": {
+            "f:ports": {
+              ".": {},
+              "k:{\"port\":8080,\"protocol\":\"TCP\"}": {
+                ".": {},
+                "f:port": {},
+                "f:protocol": {},
+                "f:targetPort": {}
+              }
+            },
+            "f:selector": {
+              ".": {},
+              "f:ves.io/workload": {}
+            },
+            "f:sessionAffinity": {},
+            "f:type": {}
+          }
+        }
+      }
+    ]
+  },
+  "spec": {
+    "ports": [
+      {
+        "protocol": "TCP",
+        "port": 8080,
+        "targetPort": 8080
+      }
+    ],
+    "selector": {
+      "ves.io/workload": "nginx-proxy"
+    },
+    "clusterIP": "192.168.17.223",
+    "clusterIPs": [
+      "192.168.17.223"
+    ],
+    "type": "ClusterIP",
+    "sessionAffinity": "None",
+    "ipFamilies": [
+      "IPv4"
+    ],
+    "ipFamilyPolicy": "SingleStack"
+  },
+  "status": {
+    "loadBalancer": {}
+  }
+}

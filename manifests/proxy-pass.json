@@ -1,0 +1,35 @@
+{
+  "metadata": {
+    "name": "proxy-pass",
+    "namespace": "blueapp",
+    "labels": {},
+    "annotations": {},
+    "disable": false
+  },
+  "spec": {
+    "origin_servers": [
+      {
+        "k8s_service": {
+          "service_name": "nginx-proxy.blueapp",
+          "site_locator": {
+            "virtual_site": {
+              "tenant": "ves-io",
+              "namespace": "shared",
+              "name": "ves-io-all-res",
+              "kind": "virtual_site"
+            }
+          },
+          "vk8s_networks": {}
+        },
+        "labels": {}
+      }
+    ],
+    "no_tls": {},
+    "port": 8080,
+    "same_as_endpoint_port": {},
+    "healthcheck": [],
+    "loadbalancer_algorithm": "LB_OVERRIDE",
+    "endpoint_selection": "LOCAL_PREFERRED"
+  },
+  "resource_version": "521863871"
+}

@@ -1,0 +1,40 @@
+{
+  "metadata": {
+    "name": "blueapp-origin-pool",
+    "namespace": "blueapp",
+    "labels": {},
+    "annotations": {},
+    "disable": false
+  },
+  "spec": {
+    "origin_servers": [
+      {
+        "public_name": {
+          "dns_name": "www.f5.com"
+        },
+        "labels": {}
+      }
+    ],
+    "use_tls": {
+      "use_host_header_as_sni": {},
+      "tls_config": {
+        "default_security": {}
+      },
+      "volterra_trusted_ca": {},
+      "no_mtls": {}
+    },
+    "port": 443,
+    "same_as_endpoint_port": {},
+    "healthcheck": [
+      {
+        "tenant": "nasafcu-vnfreogk",
+        "namespace": "blueapp",
+        "name": "blueapp-http-health-check",
+        "kind": "healthcheck"
+      }
+    ],
+    "loadbalancer_algorithm": "LB_OVERRIDE",
+    "endpoint_selection": "LOCAL_PREFERRED"
+  },
+  "resource_version": "521855694"
+}

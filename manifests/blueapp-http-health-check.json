@@ -1,0 +1,23 @@
+{
+  "metadata": {
+    "name": "blueapp-http-health-check",
+    "namespace": "blueapp",
+    "labels": {},
+    "annotations": {},
+    "disable": false
+  },
+  "spec": {
+    "http_health_check": {
+      "host_header": "www.f5.com",
+      "path": "/",
+      "use_http2": false,
+      "headers": {},
+      "request_headers_to_remove": []
+    },
+    "timeout": 3,
+    "interval": 15,
+    "unhealthy_threshold": 1,
+    "healthy_threshold": 3,
+    "jitter_percent": 30
+  }
+}

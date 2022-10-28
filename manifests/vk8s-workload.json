@@ -1,0 +1,63 @@
+{
+  "metadata": {
+    "name": "nginx-proxy",
+    "namespace": "blueapp",
+    "labels": {},
+    "annotations": {},
+    "disable": false
+  },
+  "spec": {
+    "service": {
+      "num_replicas": 1,
+      "containers": [
+        {
+          "name": "nginx-proxy",
+          "image": {
+            "name": "nginxinc/nginx-unprivileged",
+            "container_registry": {
+              "tenant": "tenantname",
+              "namespace": "blueapp",
+              "name": "dockerhub",
+              "kind": "container_registry"
+            },
+            "pull_policy": "IMAGE_PULL_POLICY_ALWAYS"
+          },
+          "init_container": false,
+          "flavor": "CONTAINER_FLAVOR_TYPE_TINY",
+          "command": [],
+          "args": []
+        }
+      ],
+      "volumes": [],
+      "configuration": {
+        "parameters": [
+          {
+            "file": {
+              "name": "default-config",
+              "data": "string:///<removed>",
+              "volume_name": "default-config-volume",
+              "mount": {
+                "mode": "VOLUME_MOUNT_READ_ONLY",
+                "mount_path": "/etc/nginx/conf.d/default.conf"
+              }
+            }
+          }
+        ]
+      },
+      "deploy_options": {
+        "all_res": {}
+      },
+      "advertise_options": {
+        "advertise_in_cluster": {
+          "port": {
+            "info": {
+              "port": 8080,
+              "protocol": "PROTOCOL_HTTP",
+              "same_as_port": {}
+            }
+          }
+        }
+      }
+    }
+  }
+}
